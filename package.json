@@ -2,7 +2,7 @@
   "name": "juny_tube",
   "version": "1.0.0",
   "scripts": {
-    "juny": "nodemon --exec babel-node src/server.js"
+    "juny": "nodemon --exec babel-node src/init.js"
   },
   "repository": {
     "type": "git",
