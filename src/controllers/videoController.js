@@ -1,9 +1,16 @@
 import Video from "../models/Video";
 
+const handelSearch = (error, document) => {
+  
+};
 
-export const home = (req, res) => {
-   //1, 2, 3, 4, 5, 6, 7, 8, 9, 10
-  return res.render("home", { pageTitle: "Home"});
+
+// Video.find({}, (error, videos) => {});
+
+export const home = async(req, res) => {
+  Video.find({}, (error, videos) => {
+    res.render("home", { pageTitle: "Home", videos:[] });
+  });
 };
 export const watch = (req, res) => {
   const { id } = req.params;  
@@ -22,12 +29,21 @@ export const getUpload = (req, res) => {
   return res.render("upload", { pageTitle: "Upload Video" });
 };
 
-export const postUpload = (req, res) => {
-  const { title } = req.body;
-  return res.redirect("/");
+export const postUpload = async (req, res) => {
+  const { title, description, hashtags } = req.body;
+  try{
+    await Video.create({
+      title, 
+      description,
+      createdAt: Date.now(),
+      hashtags: hashtags.split(",").map(word => `#${word}`),
+      meta: {
+        views: 0,
+        rating: 0,
+      },
+    });
+    return res.redirect("/");
+  } catch (error){
+    return res.render("upload", { pageTitle: "Upload Video", errorMessage: error._message, });
+  }
 };
-
-
-export const search = (req, res) => res.send("Search");
-export const upload = (req, res) => res.send("Upload");
-export const deleteVideo = (req, res) => res.send("Delete Vidoe");
