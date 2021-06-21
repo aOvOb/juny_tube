@@ -4,6 +4,7 @@ html(lang="ko")
     block head
       title #{pageTitle} | JunyTube 
       link(rel="stylesheet" href="https://unpkg.com/mvp.css")
+      a(href="/") home
   body 
     header
       h1=pageTitle
@@ -11,6 +12,8 @@ html(lang="ko")
         ul 
           li 
             a(href="/videos/upload") Upload Video
+          li
+            a(href="/") home
     main
       block content
   include partials/footer.pug
