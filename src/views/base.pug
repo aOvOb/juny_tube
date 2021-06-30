@@ -1,19 +1,23 @@
-doctype html 
+doctype html
 html(lang="ko")
-  head
-    block head
-      title #{pageTitle} | JunyTube 
-      link(rel="stylesheet" href="https://unpkg.com/mvp.css")
-      a(href="/") home
-  body 
-    header
-      h1=pageTitle
-      nav 
-        ul 
-          li 
-            a(href="/videos/upload") Upload Video
-          li
-            a(href="/") home
-    main
-      block content
-  include partials/footer.pug
+    head
+        title #{pageTitle} | JunyPage
+        link(rel="stylesheet" href="https://unpkg.com/mvp.css")
+    body
+        header
+            h1=pageTitle
+            nav
+                ul
+                    li
+                        a(href="/") Home
+                    li
+                        a(href="/join")  Join
+                    li
+                        a(href="/login")  Login                        
+                    li
+                        a(href="/search") Search
+                    li
+                        a(href="/videos/upload") Upload
+        main
+            block content
+    include partials/footer

@@ -6,17 +6,19 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/aOvOb/juny_tube.git"
+    "url": "git+https://github.com/aOvOb/task_0630.git"
   },
   "author": "juny",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/aOvOb/juny_tube/issues"
+    "url": "https://github.com/aOvOb/task_0630/issues"
   },
-  "homepage": "https://github.com/aOvOb/juny_tube#readme",
-  "description": "",
+  "homepage": "https://github.com/aOvOb/task_0630#readme",
+  "description": "/ -> Home /join -> Join /login -> Login /search -> Search",
   "dependencies": {
+    "bcrypt": "^5.0.1",
     "express": "^4.17.1",
+    "express-session": "^1.17.1",
     "mongoose": "^5.12.14",
     "morgan": "^1.10.0",
     "pug": "^3.0.2"
@@ -26,5 +28,6 @@
     "@babel/node": "^7.14.2",
     "@babel/preset-env": "^7.14.2",
     "nodemon": "^2.0.7"
-  }
+  },
+  "main": "index.js"
 }

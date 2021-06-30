@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-mongoose.connect("mongodb://127.0.0.1:27017/junytube", { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect("mongodb://127.0.0.1:27017/juny_tube", { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false,  useCreateIndex: true, });
 
 
 const db = mongoose.connection;
