@@ -53,7 +53,7 @@ export const postUpload = async (req, res) => {
     return res.redirect("/");
   } catch (error) {
     return res.status(400).render("upload", {
-      pageTitle: "Upload",
+      pageTitle: "Upload Video",
       errorMessage: error._message,
     });
   }
@@ -65,6 +65,18 @@ export const deleteVideo = async (req, res) => {
   return res.redirect("/");
 };
 
+// export const search = async (req, res) => {
+//   const { keyword } = req.query;
+//   if (keyword) {
+//     videos = await Video.find({
+//       title: {
+//         $regex: new RegExp(`${keyword}$`, "i"),
+//       },
+//     });
+//   }
+//   return res.render("search", { pageTitle: "Search", videos });
+// };
+
 export const search = async (req, res) => {
   const { keyword } = req.query;
   let videos = [];
@@ -74,6 +86,7 @@ export const search = async (req, res) => {
         $regex: new RegExp(`${keyword}$`, "i"),
       },
     });
+    // console.log(videos);
   }
-  return res.render("search", { pageTitle: "Search", videos });
+  return res.render("search", {pageTitle: "Search", videos });
 };
