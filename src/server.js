@@ -5,6 +5,7 @@ import rootRouter from "./routers/rootRouter";
 import videoRouter from "./routers/videoRouter";
 import userRouter from "./routers/userRouter";
 import { localsMiddlewares } from "./middlewares";
+import MongoStore from "connect-mongo";
 
 const app = express();
 const logger = morgan("dev");
@@ -16,9 +17,14 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(
   session({
-    secret: "Hello!",
-    resave: true,
-    saveUninitialized: true,
+    secret: process.env.COOKIE_SECRET,
+    resave: false,
+    saveUninitialized: false,
+    // expire time
+    cookie: {
+      maxAge: 3600000
+    },
+    store: MongoStore.create({ mongoUrl: process.env.DB_URL }), 
   })
 );
 
@@ -30,10 +36,10 @@ app.use(
 //   });
 // });
 
-app.get("/add-one", (req, res, next) => {
-  req.session.potato += 1;
-  return res.send(`${req.session.id}\n${req.session.potato}`);
-})
+// app.get("/add-one", (req, res, next) => {
+//   req.session.potato += 1;
+//   return res.send(`${req.session.id}\n${req.session.potato}`);
+// })
 
 app.use(localsMiddlewares);
 app.use("/", rootRouter);
