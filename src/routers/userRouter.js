@@ -22,9 +22,11 @@ userRouter.route("/change-password").all(protectorMiddleware).get(getChangePassw
 
 
 userRouter.get("/logout", protectorMiddleware, logout);
+
 userRouter.get("/github/start", publicOnlyMiddleware, startGithubLogin);
 userRouter.get("/github/finish", publicOnlyMiddleware, finishGithubLogin);
-userRouter.get(":id", see);
+
+userRouter.get("/:id", see);
 
 
 export default userRouter;

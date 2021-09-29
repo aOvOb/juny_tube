@@ -1,6 +1,8 @@
 import User from "../models/User";
 import bcrypt from "bcrypt";
 import fetch from "node-fetch";
+import { render } from "pug";
+import Video from "../models/Video"
 
 export const getJoin = (req, res) => res.render("users/join", { pageTitle: "Join" });
 export const postJoin = async (req, res) => {
@@ -187,4 +189,14 @@ export const postChangePassword = async (req, res) => {
 
 
 export const login = (req, res) => res.send("Login");
-export const see = (req, res) => res.send("See User");
+
+
+export const see = async (req, res) => {
+  const { id } = req.params;
+  const user = await User.findById(id);
+  if (!user) {
+    return res.status(404) / render("404");
+  }
+  // const videos = await Video.find({ owner: user._id });
+  return res.render("users/profile", { pageTitle: `${user.name}'s Profile`, user, })
+};
