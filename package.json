@@ -2,7 +2,8 @@
   "name": "juny_tube",
   "version": "1.0.0",
   "scripts": {
-    "juny": "nodemon --exec babel-node src/init.js"
+    "juny:server": "nodemon",
+    "juny:assets": "webpack"
   },
   "repository": {
     "type": "git",
@@ -31,7 +32,15 @@
     "@babel/core": "^7.14.3",
     "@babel/node": "^7.14.2",
     "@babel/preset-env": "^7.14.2",
-    "nodemon": "^2.0.7"
+    "babel-loader": "^8.2.2",
+    "css-loader": "^6.3.0",
+    "mini-css-extract-plugin": "^2.3.0",
+    "nodemon": "^2.0.7",
+    "sass": "^1.42.1",
+    "sass-loader": "^12.1.0",
+    "style-loader": "^3.3.0",
+    "webpack": "^5.56.0",
+    "webpack-cli": "^4.8.0"
   },
   "main": "index.js"
 }
