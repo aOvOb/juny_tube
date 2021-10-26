@@ -1,7 +1,8 @@
 extends base
 
 block content
-    video(src="/" + video.fileUrl, controls)
+    div#videoContainer
+    video(src="/" + video.fileUrl)
     div 
         button#play Play 
         button#mute Mute 
@@ -10,7 +11,10 @@ block content
             span#currentTime 00:00
             span  / 
             span#totalTime 00:00 
-
+        div
+            input(type="range",step="1", value="0", min="0")#timeline
+        div     
+            button#fullScreen Enter Full Screen 
 
 
 
