@@ -8,7 +8,10 @@ const totalTime = document.getElementById("totalTime");
 const timeline = document.getElementById("timeline");
 const fullScreenBtn = document.getElementById("fullScreen");
 const videoContainer = document.getElementById("videoContainer");
+const videoControls = document.getElementById("videoContorls");
 
+let controlsMovementTimeout = null;
+let controlsTimeout = null;
 let volumeValue = 0.5;
 video.volume = volumeValue;
 
@@ -75,7 +78,26 @@ const handleFullscreen = () => {
     videoContainer.requestFullscreen();
     fullScreenBtn.innerText = "Exit Full Screen";
   }
-  
+}
+
+const hideControls = () => videoControls.classList.remove("showing");
+
+
+const handelMouseMove = () => {
+  if(controlsTimeout){
+    clearTimeout(controlsTimeout);
+    controlsTimeout = null;
+  }
+  if(controlsMovementTimeout){
+    clearTimeout(controlsMovementTimeout);
+    controlsMovementTimeout = null;
+  }
+  videoControls.classList.add("showing")
+  controlsMovementTimeout = setTimeout(hideControls, 3000);
+}
+
+const handleMouseLeave = () => {
+  controlsTimeout = setTimeout(hideControls, 3000);
 }
 
 playBtn.addEventListener("click", handlePlayClick);
@@ -85,3 +107,5 @@ video.addEventListener("loadedmetadata", handleLoadedMetadata);
 video.addEventListener("timeupdate", handleTimeUpdate);
 timeline.addEventListener("input", handleTimeLineChange);
 fullScreenBtn.addEventListener("click", handleFullscreen);
+video.addEventListener("mousemove", handelMouseMove);
+video.addEventListener("mouseleave", handleMouseLeave);
