@@ -1,10 +1,32 @@
+import { createFFmpeg, fetchFile } from "@ffmpeg/ffmpeg";
+import { async } from "regenerator-runtime";
+const startBtn = document.getElementById("startBtn");
+const video = document.getElementById("preview");
+
 const startBtn = document.getElementById("startBtn");
 const video = document.getElementById("preview")
 
+let stream;
+let recorder;
+let videoFIle;
+
+const handleDownload = async() => {
+  const ffmpeg = createFFmpeg({ log: true });
+  await ffmpeg.load();
+  
+  const a = document.createElement("a");
+  a.href = videoFile;
+  a.download = "MyRecording.webm"
+  document.body.appendChild(a);
+  a.click();
+}
+
 const handleStop = () => {
-  startBtn.innerText = "Start Recording"
+  startBtn.innerText = "Download Recording"
   startBtn.removeEventListener("click", handleStop);
-  startBtn.addEventListener("click", handleStart);
+  startBtn.addEventListener("click", handleDownload);
+
+  recorder.stop();
 }
 
 const handleStart = () => {
@@ -12,15 +34,23 @@ const handleStart = () => {
   startBtn.removeEventListener("click", handleStart);
   startBtn.addEventListener("click", handleStop);
 
-  const recorder = new MediaRecorder(stream)
-}
+  recorder = new MediaRecorder(stream)
+  recorder.ondataavailable = (event) => {
+    videoFile = URL.createObjectURL(event.data);
+    video.srcObject = null;
+    video.src = videoFile;
+    video.loop = true;
+    video.play();
+  }
+  recorder.start();
+};
 
 
 
 const init = async () => {
-  const stream = await navigator.mediaDevices.getUserMedia({
+  stream = await navigator.mediaDevices.getUserMedia({
     audio: true,
-    video: { width: 200, height: 100 },
+    video: true,
   });
   video.srcObject = stream
   video.play();
