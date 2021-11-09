@@ -1,25 +1,26 @@
 import { createFFmpeg, fetchFile } from "@ffmpeg/ffmpeg";
-import { async } from "regenerator-runtime";
-const startBtn = document.getElementById("startBtn");
-const video = document.getElementById("preview");
 
 const startBtn = document.getElementById("startBtn");
 const video = document.getElementById("preview")
 
 let stream;
 let recorder;
-let videoFIle;
+let videoFile; 
 
-const handleDownload = async() => {
+const handleDownload = async () => {
   const ffmpeg = createFFmpeg({ log: true });
   await ffmpeg.load();
-  
+
+  ffmpeg.FS("writeFile", "recording.webm", await fetchFile(videoFile));
+
+  await ffmpeg.run("-i", "recording.webm", "-r", "60", "output.mp4");
+
   const a = document.createElement("a");
   a.href = videoFile;
-  a.download = "MyRecording.webm"
+  a.download = "MyRecording.webm";
   document.body.appendChild(a);
   a.click();
-}
+};
 
 const handleStop = () => {
   startBtn.innerText = "Download Recording"
