@@ -17,8 +17,8 @@
   "homepage": "https://github.com/aOvOb/task_0630#readme",
   "description": "/ -> Home /join -> Join /login -> Login /search -> Search",
   "dependencies": {
-    "@ffmpeg/core": "^0.10.0",
-    "@ffmpeg/ffmpeg": "^0.10.1",
+    "@ffmpeg/core": "^0.8.5",
+    "@ffmpeg/ffmpeg": "^0.9.8",
     "bcrypt": "^5.0.1",
     "connect-mongo": "^4.6.0",
     "dotenv": "^10.0.0",

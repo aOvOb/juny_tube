@@ -1,3 +1,4 @@
+import { createFFmpeg, fetchFile } from "@ffmpeg/ffmpeg";
 const startBtn = document.getElementById("startBtn");
 const video = document.getElementById("preview");
 
@@ -5,10 +6,22 @@ let stream;
 let recorder;
 let videoFile;
 
-const handleDownload = () => {
+const handleDownload = async () => {
+  const ffmpeg = createFFmpeg({ corePath:'https://unpkg.com/@ffmpeg/core@0.8.5/dist/ffmpeg-core.js' ,log: true })
+
+  // ffmpeg 버그있음.... 최신 10.0.0  현재: "@ffmpeg/core": "^0.8.5", "@ffmpeg/ffmpeg": "^0.9.8", 버그있음  
+  // await ffmpeg.load();
+  // ffmpeg.FS("writeFile", "recording.webm", await fetchFile(videoFile));
+  // await ffmpeg.run("-i", "recording.webm", "-r", "60", "output.mp4");
+
+  // const mp4File = ffmpeg.FS("readFile", "output.mp4")
+
+  // console.log(mp4File)
+  // console.log(mp4File.buffer)
+
   const a = document.createElement("a");
   a.href = videoFile;
-  a.download = "MyRecording.webm";
+  a.download = "MyRecording.mp4";
   document.body.appendChild(a);
   a.click();
 };
