@@ -1,6 +1,7 @@
 import express from "express";
 import morgan from "morgan";
 import session from "express-session";
+import flash from "express-flash";
 import rootRouter from "./routers/rootRouter";
 import videoRouter from "./routers/videoRouter";
 import userRouter from "./routers/userRouter";
@@ -42,6 +43,7 @@ app.use(
 //   return res.send(`${req.session.id}\n${req.session.potato}`);
 // })
 
+app.use(flash());
 app.use(localsMiddlewares);
 app.use("/", rootRouter);
 app.use("/uploads", express.static("uploads"));

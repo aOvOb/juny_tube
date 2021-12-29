@@ -134,7 +134,11 @@ export const finishGithubLogin = async (req, res) => {
 };
 
 export const logout = (req, res) => {
+  // logout시 flash message need session error 때문에 destroy대신 session에 null값 넣어봄
+  // req.session.user = null;
   req.session.destroy();
+  // flash requires session issue 해결 못해서 flash message 그냥 없에버림 
+  // req.flash("info", "Bye-bye");
   return res.redirect("/");
 };
 export const getEdit = (req, res) => {
@@ -165,6 +169,7 @@ export const postEdit = async (req, res) => {
 
 export const getChangePassword = (req, res) => {
   if (req.session.user.socialOnly === true) {
+    req.flash("error", "Can't change password.")
     return res.redirect("/");
   }
   return res.render("users/change-password", { pageTitle: "Change Password" });
